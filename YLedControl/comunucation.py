@@ -3,15 +3,15 @@ import json
 
 
 # счетчик команд, отправленных на лампу
-def _cmd_id(self):
-    self.__cmd_id += 1
-    return self.__cmd_id - 1
+def _cmd_id(lamp: object):
+    lamp.__cmd_id += 1
+    return lamp.__cmd_id - 1
 
 # функция отправки команды на лампу
 # в качестве аргумента название команды str и массив с параметрами
 def _sendMessage(lamp: object, method: str, params: list):
     command = {
-        'id': 1,
+        'id': _cmd_id(lamp),
         'method': method,
         'params': params
     }
