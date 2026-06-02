@@ -34,7 +34,7 @@ class Lamp(object):
     # в качестве аргумента значение яркости int
     def brightness(self, value):
         hue = _interval(value, 0, 100)
-        return _sendMessage(self, 'set_bright', [hue, 10000, 1])
+        return _sendMessage(self, 'set_bright', [hue, 500, 1])
 
     # функция изменения цветовой температуры
     # в качестве аргумента значение цветовой температуры int
@@ -42,10 +42,12 @@ class Lamp(object):
         hue = _interval(value, 1700, 6500)
         return _sendMessage(self, 'set_ct_abx', [hue, 500, 1])
 
+    # функция включения лампы
     def power_on(self):
         print('Power on')
         return _sendMessage(self, 'set_power', ['on', 500, 1])
 
+    # функция выключения лампы
     def power_off(self):
         print('Power off')
         return _sendMessage(self, 'set_power', ['off', 500, 1])
