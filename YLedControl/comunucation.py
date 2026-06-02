@@ -1,10 +1,10 @@
 import socket
 from asyncio import timeout
 
-import ifaddr
+# import ifaddr
 import json
 import requests
-from main import Lamp
+# from .main import Lamp
 
 
 
@@ -14,7 +14,7 @@ from main import Lamp
 
 # функция отправки команды на лампу
 # в качестве аргумента название команды str и массив с параметрами
-def _sendMessage(method: str, params: list):
+def _sendMessage(lamp: object, method: str, params: list):
     command = {
         'id': 1,
         'method': method,
@@ -25,9 +25,9 @@ def _sendMessage(method: str, params: list):
 
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            sock.settimeout(Lamp.timeout)
+            sock.settimeout(lamp.timeout)
 
-            sock.connect((Lamp.ip, Lamp.port))
+            sock.connect((lamp.ip, lamp.port))
             sock.sendall(message.encode('utf-8'))
 
             response = sock.recv(1024).decode('utf-8')

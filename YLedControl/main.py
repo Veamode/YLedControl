@@ -1,9 +1,8 @@
 import socket
 import json
 
-from YLedControl import transition
-from YLedControl.comunucation import _sendMessage
-from YLedControl.utility import _interval
+from .comunucation import _sendMessage
+from .utility import _interval
 global settings
 
 # rerf config file
@@ -20,9 +19,9 @@ class Lamp(object):
         self.__cmd_id = 0
         self.__socket = None
 
-        f = open('config.json')  # открывает файл 'config.json', загружает его содержимое в переменную 'conf' в формате словаря (dictionary) при помощи функции 'json.load()', а затем выводит все ключи словаря 'conf' при помощи цикла 'for'.
-        self.conf = json.load(open('config.json'))
-        f.close()
+        # f = open('config.json')  # открывает файл 'config.json', загружает его содержимое в переменную 'conf' в формате словаря (dictionary) при помощи функции 'json.load()', а затем выводит все ключи словаря 'conf' при помощи цикла 'for'.
+        # self.conf = json.load(open('config.json'))
+        # f.close()
 
     # счетчик команд, отправленных на лампу
     def _cmd_id(self):
@@ -71,3 +70,22 @@ class Lamp(object):
         with open('config.json', 'w') as outfile:
             outfile.write(json.dumps(Lamp.conf))
         return _sendMessage('set_ct_abx', [hue, 500])
+
+    def power_on(self):
+        print('Power on')
+        # Lamp.conf.update('power', ['on'])
+        # with open('config.json', 'w') as outfile:
+        #     outfile.write(json.dumps(Lamp.conf))
+        return _sendMessage(self, 'set_power', ['on', 500])
+
+    def power_off(self):
+        print('Power off')
+        # Lamp.conf.update('power', ['off'])
+        # with open('config.json', 'w') as outfile:
+        #     outfile.write(json.dumps(Lamp.conf))
+        return _sendMessage('set_power', ['off', 500])
+
+    # функция изменения состояния лампы
+    def power_switch(self):
+        print('Power switch')
+        return _sendMessage('toggle', [])

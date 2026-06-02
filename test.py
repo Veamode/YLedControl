@@ -1,7 +1,8 @@
-from YLedControl import *
+import YLedControl
 import time
 
-lamp = connect('192.168.1.1')
+lamp = YLedControl.Lamp('192.168.79.73')
+
 
 lamp.power_on()
 

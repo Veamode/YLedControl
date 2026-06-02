@@ -1,6 +1,6 @@
-from YLedControl.comunucation import _sendMessage
-from YLedControl.utility import _interval, _rgb_to_code
-from main import Lamp
+from .comunucation import _sendMessage
+from .utility import _interval, _rgb_to_code
+from .main import Lamp
 import json
 
 
