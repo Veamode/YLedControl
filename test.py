@@ -1,34 +1,46 @@
 import YLedControl
 import time
 
-lamp = YLedControl.Lamp('192.168.79.73')
+lamp = YLedControl.Lamp('192.168.1.104')
 
-
+# включение лампы
 lamp.power_on()
 
-state = lamp.get_settings()
-print(state)
+# получение текущих параметров
+lamp.get_settings()
+time.sleep(2)
 
-for i in range(3):
-    lamp.power_on()
-    time.sleep(0.5)
-    lamp.power_off()
-    time.sleep(0.5)
+# изменение режима работы
+lamp.power_switch()
+time.sleep(2)
+lamp.power_switch()
+time.sleep(2)
 
-lamp.set_rgb('255.0.0')
-time.sleep(1)
-lamp.set_rgb('blue')
-time.sleep(1)
-lamp.set_hsv('90.100.100')
-time.sleep(1)
-lamp.set_hsv('yellow')
-
-lamp = Lamp("192.168.1.5")
-
-lamp.power_on()
-lamp.power_off()
-
+# изменение яркости
+lamp.brightness(10)
+time.sleep(2)
 lamp.brightness(100)
+time.sleep(2)
 
+# изменение цветовой температуры
+lamp.temperature(1700)
+time.sleep(2)
+lamp.temperature(6500)
+time.sleep(2)
+
+# установка цвета
+lamp.set_rgb('255.0.0')
+time.sleep(2)
+lamp.set_rgb('orange')
+time.sleep(2)
+lamp.set_hsv('90.100.100')
+time.sleep(2)
+lamp.set_hsv('white')
+time.sleep(2)
+
+# сохранение текущих настроек, как настройки по умолчанию
+lamp.set_default()
+
+# выключение лампы
 lamp.power_off()
 
